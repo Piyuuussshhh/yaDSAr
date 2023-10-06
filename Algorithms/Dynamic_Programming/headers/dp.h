@@ -24,6 +24,21 @@ typedef std::chrono::high_resolution_clock                              Clock;
 typedef std::chrono::microseconds                                       Microseconds;
 typedef std::chrono::time_point<std::chrono::high_resolution_clock>     Time;
 
+// For 2D dp problems.
+typedef std::vector<std::vector<int>>        Matrix;
+#define INIT_VAL                             -1
+
+// ? Helper functions for 2D dp problems:
+
+void print_matrix(Matrix& mat) {
+    for (const auto& i: mat) {
+        for (const auto& j: i) {
+            std::cout << j << "\t";
+        }
+        std::cout << "\n";
+    } std::cout << "\n";
+}
+
 // Helper function to calculute time taken for an algorithm to run.
 double time_taken(Time start, Time end) {
     auto duration_obj = std::chrono::duration_cast<Microseconds>(end - start);

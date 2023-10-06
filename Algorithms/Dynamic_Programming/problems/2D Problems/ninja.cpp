@@ -33,19 +33,7 @@
 */
 
 
-#define INIT_VAL                             -1
 #define ACTIVITIES_PLUS_INIT                 4
-typedef std::vector<std::vector<int>>        Matrix;
-
-// ? Helper functions:
-void print_matrix(Matrix& mat) {
-    for (const auto& i: mat) {
-        for (const auto& j: i) {
-            std::cout << j << "\t";
-        }
-        std::cout << "\n";
-    } std::cout << "\n";
-}
 
 // TOP DOWN RECURSION APPROACH.
 int max_points_r(
@@ -128,6 +116,8 @@ int max_points_bu(Matrix& points) {
         }
     }
 
+    print_matrix(dp);
+
     return dp[points.size() - 1][3];
 }
 
@@ -181,7 +171,7 @@ int main() {
     // * ---------------------------------MEMOIZATION APPROACH---------------------------------
     Time start_td = Clock::now();
 
-    Matrix dp(n, std::vector<int>(4, -1));
+    Matrix dp(n, std::vector<int>(ACTIVITIES_PLUS_INIT, -1));
     std::cout << "Max merit points: " << max_points_td(points.size() - 1, INIT_VAL, points, dp) << "\t";
 
     Time end_td = Clock::now();
