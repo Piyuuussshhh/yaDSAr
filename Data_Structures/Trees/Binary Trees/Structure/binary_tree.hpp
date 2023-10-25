@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "../include/treenode.hpp"
 
 namespace data {
 
@@ -24,24 +25,9 @@ namespace data {
     //     void inorder();
     //     void postorder();
 
-    //     ~BinaryTree_l();
+    //     ~BinaryTree_v();
     // };
 
-    template <typename T = int>
-    class TreeNode {
-    private:
-        TreeNode<T>     *left;
-        T               value;
-        TreeNode<T>     *right;
-    public:
-        TreeNode(const T&);
-
-        T               get_value();
-
-        ~TreeNode();
-    };
-
-    // l stands for linked, as in with pointers.
     template <typename T = int>
     class BinaryTree {
     private:
