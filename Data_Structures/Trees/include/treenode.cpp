@@ -1,6 +1,7 @@
 #include "treenode.hpp"
 
 namespace data {
+
     template <typename T>
     TreeNode<T>::TreeNode(const T& val)
         : value(val), right(nullptr), left(nullptr) {}
@@ -15,4 +16,5 @@ namespace data {
         delete this -> right;
         delete this -> left;
     }
+    
 }
