@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+
 #include "../include/treenode.hpp"
 
 namespace data {
@@ -32,6 +33,7 @@ namespace data {
     class BinaryTree {
     private:
         TreeNode<T>     *root;
+
         void            preorder_r(TreeNode<T> *) const;
         void            inorder_r(TreeNode<T> *) const;
         void            postorder_r(TreeNode<T> *) const;

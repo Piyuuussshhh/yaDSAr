@@ -11,6 +11,7 @@ namespace data {
 
     /*---x---x---x---x---x---x---x---x---x---x---x---x---x---x*/
     /*                      Tree creation                     */
+    //! WHAT IF T IS std::string AND YOU WANT TO ENTER NULL, THEN THIS CODE WILL CRASH.
     template <typename T>
     void BinaryTree<T>::create_tree() {
         std::queue<TreeNode<T> *> q;
@@ -175,6 +176,10 @@ namespace data {
     /*                      Tree deletion                     */
     template <typename T>
     void BinaryTree<T>::delete_tree(TreeNode<T> *node) {
+        if (!node) {
+            return;
+        }
+
         delete_tree(node -> right);
         delete_tree(node -> left);
 
