@@ -2,9 +2,9 @@
 
 // ! Question.
 /*
-    Count the number of unique ways to reach the bottom right corner of a matrix from the top left corner.
+    Count the number of unique ways to reach the bottom right corner of a matrix_tMatrix_t from the top left corner.
     You can only move down or to the right.
-    ie, [0, 0] to [m - 1, n - 1] for an MxN matrix.
+    ie, [0, 0] to [m - 1, n - 1] for an MxN matrix_tMatrix_t.
 */
 
 // ! Intuition.
@@ -14,7 +14,7 @@
 
     Base cases:
         -> if you reach the top left corner, you return 1 because you have reached the destination with a unique path.
-        -> if you exceed the boundaries of the matrix, you return 0 because that is an invalid path.
+        -> if you exceed the boundaries of the matrix_tMatrix_t, you return 0 because that is an invalid path.
 
     Now, initially, the recursion will first go upwards directly with no lefts until it goes out of bounds {where the fn returns 0},
     and then it keeps going left until it reaches the destination. The final fn call returns 1, and we keep returning until we reach the
@@ -46,7 +46,7 @@ int count_paths_r(int row, int col) {
 
 // TOP DOWN MEMOIZATION APPROACH.
 //? TIME COMPLEXITY: O(m * n);      SPACE COMPLEXITY: O((m - 1) + (n - 1)) + O(m * n) {Big O of path length + dp array}
-int count_paths_td(int row, int col, Matrix& dp) {
+int count_paths_td(int row, int col, Matrix_t& dp) {
     if (row == 0 && col == 0) {
         return 1;
     }
@@ -66,7 +66,7 @@ int count_paths_td(int row, int col, Matrix& dp) {
 // BOTTOM UP TABULATION APPROACH.
 //? TIME COMPLEXITY: O(m * n);      SPACE COMPLEXITY: O(m * n);
 int count_paths_bu(int m, int n) {
-    Matrix dp(m, std::vector<int>(n, INIT_VAL));
+    Matrix_t dp(m, std::vector<int>(n, INIT_VAL));
 
     dp[0][0] = 1;
 
@@ -86,7 +86,7 @@ int count_paths_bu(int m, int n) {
         }
     }
 
-    // print_matrix(dp);
+    // print_matrix_tMatrix_t(dp);
 
     return dp[m - 1][n - 1];
 }
@@ -166,7 +166,7 @@ int main() {
     // * ---------------------------------MEMOIZATION APPROACH---------------------------------
     Time start_td = Clock::now();
 
-    Matrix dp(m, std::vector<int>(n, INIT_VAL));
+    Matrix_t dp(m, std::vector<int>(n, INIT_VAL));
     std::cout << "No. of unique paths: " << count_paths_td(m - 1, n - 1, dp) << "\t";
 
     Time end_td = Clock::now();

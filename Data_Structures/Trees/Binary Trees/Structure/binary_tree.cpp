@@ -66,7 +66,7 @@ namespace data {
     /*---x---x---x---x---x---x---x---x---x---x---x---x---x---x*/
     /*                    Tree traversals                     */
     template <typename T>
-    void BinaryTree<T>::preorder_r(TreeNode<T> *node) {
+    void BinaryTree<T>::preorder_r(TreeNode<T> *node) const {
         if (node) {
             std::cout << node -> value << " ";
             preorder(node -> left);
@@ -75,7 +75,7 @@ namespace data {
     }
 
     template <typename T>
-    void BinaryTree<T>::inorder_r(TreeNode<T> *node) {
+    void BinaryTree<T>::inorder_r(TreeNode<T> *node) const {
         if (node) {
             inorder(node -> left);
             std::cout << node -> value << " ";
@@ -84,7 +84,7 @@ namespace data {
     }
 
     template <typename T>
-    void BinaryTree<T>::postorder_r(TreeNode<T> *node) {
+    void BinaryTree<T>::postorder_r(TreeNode<T> *node) const {
         if (node) {
             postorder(node -> left);
             postorder(node -> right);
@@ -93,25 +93,25 @@ namespace data {
     }
 
     template <typename T>
-    void BinaryTree<T>::preorder() {
+    void BinaryTree<T>::preorder() const {
         preorder_r(root);
         std::cout << "\n";
     }
 
     template <typename T>
-    void BinaryTree<T>::inorder() {
+    void BinaryTree<T>::inorder() const {
         inorder_r(root);
         std::cout << "\n";
     }
 
     template <typename T>
-    void BinaryTree<T>::postorder() {
+    void BinaryTree<T>::postorder() const {
         postorder_r(root);
         std::cout << "\n";
     }
 
     template <typename T>
-    void BinaryTree<T>::levelorder() {
+    void BinaryTree<T>::levelorder() const {
         std::queue<TreeNode<T> *> q;
         q.push(root);
         std::cout << root -> value << " ";
@@ -139,7 +139,7 @@ namespace data {
     /*---x---x---x---x---x---x---x---x---x---x---x---x---x---x*/
     /*                     Count & Height                     */
     template <typename T>
-    int BinaryTree<T>::count_r(TreeNode<T> *node) {
+    int BinaryTree<T>::count_r(TreeNode<T> *node) const {
         if (!node) {
             return 0;
         }
@@ -152,12 +152,12 @@ namespace data {
     }
 
     template <typename T>
-    int BinaryTree<T>::count() {
+    int BinaryTree<T>::count() const {
         return count_r(root);
     }
 
     template <typename T>
-    int BinaryTree<T>::height_r(TreeNode<T> *node) {
+    int BinaryTree<T>::height_r(TreeNode<T> *node) const {
         if (!node) {
             return 0;
         }
@@ -170,7 +170,7 @@ namespace data {
     }
 
     template <typename T>
-    int BinaryTree<T>::get_height() {
+    int BinaryTree<T>::get_height() const {
         return height_r(root);
     }
     /*---x---x---x---x---x---x---x---x---x---x---x---x---x---x*/
@@ -178,7 +178,7 @@ namespace data {
     /*---x---x---x---x---x---x---x---x---x---x---x---x---x---x*/
     /*                        Leaf Nodes                      */
     template <typename T>
-    int BinaryTree<T>::leaf_node_count_r(TreeNode<T> *node) {
+    int BinaryTree<T>::leaf_node_count_r(TreeNode<T> *node) const {
         if (!node) {
             return 1;
         }
@@ -190,7 +190,7 @@ namespace data {
     }
 
     template <typename T>
-    int BinaryTree<T>::leaf_node_count() {
+    int BinaryTree<T>::leaf_node_count() const {
         return leaf_node_count_r(root);
     }
 

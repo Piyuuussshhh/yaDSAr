@@ -2,9 +2,9 @@
 
 // ! QUESTION.
 /*
-    You have a Nx3 matrix. You have to sum an element from each row such that two adjacent rows' selected elements
+    You have a Nx3 matrix_t. You have to sum an element from each row such that two adjacent rows' selected elements
     don't belong to the same column, and return the maximum sum.
-    eg. Matrix = [
+    eg. Matrix_t = [
         [1, 2, 5],
         [3, 1, 1],
         [3, 3, 3],
@@ -28,7 +28,7 @@
         -> Once this is done for both available choices, we take the maximum value from them and return it to the previous call.
 
  *  Intuition for memoization:
-        -> We create a N*4 matrix dp {N rows, 4 columns because you have 3 original columns plus the initial column value} // ! WHAT DO ITS FINAL VALUES SIGNIFY??
+        -> We create a N*4 matrix_t dp {N rows, 4 columns because you have 3 original columns plus the initial column value} // ! WHAT DO ITS FINAL VALUES SIGNIFY??
         -> For every maximum point value we get, we store it in the [row][last_column] index.
 */
 
@@ -39,7 +39,7 @@
 int max_points_r(
     int row,
     int last_column,
-    Matrix& points
+    Matrix_t& points
 ) {
     if (row == 0) {
         int max_points = INT_MIN;
@@ -67,8 +67,8 @@ int max_points_r(
 int max_points_td(
     int row,
     int last_column,
-    Matrix& points,
-    Matrix& dp
+    Matrix_t& points,
+    Matrix_t& dp
 ) {
     if (row == 0) {
         int max_points = INT_MIN;
@@ -96,8 +96,8 @@ int max_points_td(
 
 // BOTTOM UP TABULATION APPROACH.
 //? TIME COMPLEXITY: O((4 * N) * 3) >> O(N);     SPACE COMPLEXITY: O(4 * N) >> O(N).
-int max_points_bu(Matrix& points) {
-    Matrix dp(points.size(), std::vector<int>(4, -1));
+int max_points_bu(Matrix_t& points) {
+    Matrix_t dp(points.size(), std::vector<int>(4, -1));
 
     dp[0][0] = std::max(points[0][1], points[0][2]);
     dp[0][1] = std::max(points[0][0], points[0][2]);
@@ -123,7 +123,7 @@ int max_points_bu(Matrix& points) {
 
 // OPTIMIZED BOTTOM UP TABULATION APPROACH.
 //? TIME COMPLEXITY: O((4 * N) * 3) >> O(N);     SPACE COMPLEXITY: O(4) >> O(N).
-int opt_max_points_bu(Matrix& points) {
+int opt_max_points_bu(Matrix_t& points) {
     std::vector<int> prev_row(4, -1);
 
     prev_row[0] = std::max(points[0][1], points[0][2]);
@@ -152,7 +152,7 @@ int main() {
     int n;
     std::cin >> n;
 
-    Matrix points(n, std::vector<int>(3));
+    Matrix_t points(n, std::vector<int>(3));
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < 3; j++) {
             std::cin >> points[i][j];
@@ -171,7 +171,7 @@ int main() {
     // * ---------------------------------MEMOIZATION APPROACH---------------------------------
     Time start_td = Clock::now();
 
-    Matrix dp(n, std::vector<int>(ACTIVITIES_PLUS_INIT, -1));
+    Matrix_t dp(n, std::vector<int>(ACTIVITIES_PLUS_INIT, -1));
     std::cout << "Max merit points: " << max_points_td(points.size() - 1, INIT_VAL, points, dp) << "\t";
 
     Time end_td = Clock::now();

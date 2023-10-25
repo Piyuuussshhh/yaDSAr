@@ -25,12 +25,12 @@ typedef std::chrono::microseconds                                       Microsec
 typedef std::chrono::time_point<std::chrono::high_resolution_clock>     Time;
 
 // For 2D dp problems.
-typedef std::vector<std::vector<int>>        Matrix;
+typedef std::vector<std::vector<int>>        Matrix_t;
 #define INIT_VAL                             -1
 
 // ? Helper functions for 2D dp problems:
 
-void print_matrix(Matrix& mat) {
+void print_matrix(Matrix_t& mat) {
     for (const auto& i: mat) {
         for (const auto& j: i) {
             std::cout << j << "\t";

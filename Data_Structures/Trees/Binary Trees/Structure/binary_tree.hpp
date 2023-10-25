@@ -46,12 +46,12 @@ namespace data {
     class BinaryTree {
     private:
         TreeNode<T>     *root;
-        void            preorder_r(TreeNode<T> *);
-        void            inorder_r(TreeNode<T> *);
-        void            postorder_r(TreeNode<T> *);
-        int             count_r(TreeNode<T> *);
-        int             height_r(TreeNode<T> *);
-        int             leaf_node_count_r(TreeNode<T> *);
+        void            preorder_r(TreeNode<T> *) const;
+        void            inorder_r(TreeNode<T> *) const;
+        void            postorder_r(TreeNode<T> *) const;
+        int             count_r(TreeNode<T> *) const;
+        int             height_r(TreeNode<T> *) const;
+        int             leaf_node_count_r(TreeNode<T> *) const;
         // postorder traversal of binary tree while freeing memory.
         void            delete_tree(TreeNode<T> *);
     public:
@@ -59,15 +59,14 @@ namespace data {
 
         void            create_tree();
 
-        void            preorder();
-        void            inorder();
-        void            postorder();
-        void            levelorder();
+        void            preorder() const;
+        void            inorder() const;
+        void            postorder() const;
+        void            levelorder() const;
 
-        int             count();
-        int             get_height();
-        int             leaf_node_count();
-
+        int             count() const;
+        int             get_height() const;
+        int             leaf_node_count() const;
 
         ~BinaryTree();
     };
