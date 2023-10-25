@@ -16,5 +16,5 @@ namespace data {
         delete this -> right;
         delete this -> left;
     }
-    
+
 }
