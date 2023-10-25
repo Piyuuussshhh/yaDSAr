@@ -2,19 +2,13 @@
 
 namespace data {
 
-    // class BinaryTree;
-    // class BST;
-
     template <typename T = int>
     class TreeNode {
-    private:
+    public:
         TreeNode<T>     *left;
         T               value;
         TreeNode<T>     *right;
 
-        friend class BinaryTree<U>;
-        friend class BST<U>;
-    public:
         TreeNode(const T&);
 
         T               get_value();
