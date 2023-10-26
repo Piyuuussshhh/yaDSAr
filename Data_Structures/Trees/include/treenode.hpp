@@ -1,5 +1,9 @@
 #pragma once
 
+/*=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|*/
+/*                                                  DEFINITION                                                    */
+/*=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|*/
+
 namespace data {
 
     template <typename T = int>
@@ -14,9 +18,29 @@ namespace data {
         T               get_value();
 
         ~TreeNode();
-
     };
 
 }
 
-#include "treenode.cpp"
+/*=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|*/
+/*                                                IMPLEMENTATION                                                  */
+/*=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|*/
+
+namespace data {
+
+    template <typename T>
+    TreeNode<T>::TreeNode(const T& val)
+        : left(nullptr), value(val), right(nullptr) {}
+
+    template <typename T>
+    T TreeNode<T>::get_value() {
+        return this -> value;
+    }
+
+    template <typename T>
+    TreeNode<T>::~TreeNode() {
+        delete this -> right;
+        delete this -> left;
+    }
+
+}
