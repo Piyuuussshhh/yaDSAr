@@ -38,9 +38,6 @@ namespace data {
     }
 
     template <typename T>
-    TreeNode<T>::~TreeNode() {
-        delete this -> right;
-        delete this -> left;
-    }
+    TreeNode<T>::~TreeNode() {}
 
 }
