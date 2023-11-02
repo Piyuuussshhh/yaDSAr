@@ -4,6 +4,7 @@
 #include <concepts>
 #include <vector>
 #include <stack>
+#include <climits>
 
 #include "../../include/treenode.hpp"
 
@@ -73,14 +74,14 @@ namespace data {
         int idx = 0;
 
         this -> root = new TreeNode(preorder[idx++]);
-        TreeNode<T> *temp = root;
+        TreeNode<T> *node = root;
 
         while (idx < size) {
-            if (preorder[idx] < temp -> value) {
+            if (preorder[idx] < node -> value) {
                 TreeNode<T> *new_node = new TreeNode(preorder[idx++]);
-                temp -> left = new_node;
-                stk.push(temp);
-                temp = new_node;
+                node -> left = new_node;
+                stk.push(node);
+                node = new_node;
             } else {
                 int upper = 0;
                 if (stk.empty()) {
@@ -89,12 +90,12 @@ namespace data {
                     upper = stk.top() -> value;
                 }
 
-                if (preorder[idx] > temp -> value && preorder[idx] < upper) {
+                if (preorder[idx] > node -> value && preorder[idx] < upper) {
                     TreeNode<T> *new_node = new TreeNode(preorder[idx++]);
-                    temp -> right = new_node;
-                    temp = new_node;
+                    node -> right = new_node;
+                    node = new_node;
                 } else {
-                    temp = stk.top();
+                    node = stk.top();
                     stk.pop();
                 }
             }
