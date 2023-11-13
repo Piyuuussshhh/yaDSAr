@@ -11,6 +11,8 @@ namespace data {
     public:
         TreeNode<T>     *left;
         T               value;
+        // for AVL trees.
+        int             height;
         TreeNode<T>     *right;
 
         TreeNode(const T&);
@@ -30,7 +32,7 @@ namespace data {
 
     template <typename T>
     TreeNode<T>::TreeNode(const T& val)
-        : left(nullptr), value(val), right(nullptr) {}
+        : left(nullptr), value(val), height(1), right(nullptr) {}
 
     template <typename T>
     T TreeNode<T>::get_value() {

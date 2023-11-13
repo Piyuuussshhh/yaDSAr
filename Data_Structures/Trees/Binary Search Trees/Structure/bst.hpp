@@ -171,7 +171,7 @@ namespace data {
         left = height_r(node -> left);
         right = height_r(node -> right);
 
-        return left > right ? left + 1 : right + 1;
+        return node -> height = left > right ? left + 1 : right + 1;
     }
 
     template <typename T>
