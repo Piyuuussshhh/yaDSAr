@@ -23,6 +23,8 @@ namespace data {
         void lr_rotate(TreeNode<T> *);
         void rr_rotate(TreeNode<T> *);
         void rl_rotate(TreeNode<T> *);
+
+        void delete_tree(TreeNode<T> *);
     public:
         AVLTree();
         AVLTree(const T&);
@@ -30,6 +32,9 @@ namespace data {
         int height() const;
 
         void insert(const T&);
+        void remove(const T&);
+
+        ~AVLTree();
     };
 
 }
@@ -98,6 +103,63 @@ namespace data {
     }
 
     template <typename T>
+    void AVLTree<T>::lr_rotate(TreeNode<T> *node) {
+        if (!node) {
+            return;
+        }
+
+        TreeNode<T> *lchild = node -> left;
+        TreeNode<T> *new_root = lchild -> right;
+
+        lchild -> right = new_root -> left;
+        node -> left = new_root -> right;
+
+        new_root -> left = lchild;
+        new_root -> right = node;
+
+        if (this -> root == node) {
+            this -> root = new_root;
+        }
+    }
+
+    template <typename T>
+    void AVLTree<T>::rr_rotate(TreeNode<T> *node) {
+        if (!node) {
+            return;
+        }
+
+        TreeNode<T> *new_root = node -> right;
+        TreeNode<T> *lchild_of_new_root = new_root -> left;
+
+        new_root -> left = node;
+        node -> right = lchild_of_new_root;
+
+        if (this -> root == node) {
+            this -> root = new_root;
+        }
+    }
+
+    template <typename T>
+    void AVLTree<T>::rl_rotate(TreeNode<T> *node) {
+        if (!node) {
+            return;
+        }
+
+        TreeNode<T> *rchild = node -> right;
+        TreeNode<T> *new_root = rchild -> left;
+
+        rchild -> left = new_root -> right;
+        node -> right = new_root -> left;
+
+        new_root -> right = rchild;
+        new_root -> left = node;
+
+        if (this -> root == node) {
+            this -> root = new_root;
+        }
+    }
+
+    template <typename T>
     void AVLTree<T>::insert(const T& val) {
         TreeNode<T> *prev = nullptr, *node = this -> root;
 
@@ -124,6 +186,9 @@ namespace data {
         } else {
             prev -> right = new_node;
         }
+
+        // ! THIS IS WRONG. NEED TO RE-IMPLEMENT.
+        // TODO: rotation(prev) is wrong logic. Not necessary that we always perform rotations at prev only.
 
         /*
             We calculate height so that we get the new heights of each node's subtree
@@ -158,6 +223,23 @@ namespace data {
 
         // So that the height of each node is recalculated after all the rotations.
         __discard__ = this -> height();
+    }
+
+    template <typename T>
+    void AVLTree<T>::delete_tree(TreeNode<T> *node) {
+        if (!node) {
+            return;
+        }
+
+        delete_tree(node -> right);
+        delete_tree(node -> left);
+
+        delete node;
+    }
+
+    template <typename T>
+    AVLTree<T>::~AVLTree() {
+        delete_tree(this -> root);
     }
 
 }
