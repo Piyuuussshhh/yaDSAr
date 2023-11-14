@@ -18,7 +18,13 @@ namespace data {
 
         int height_r(TreeNode<T> *) const;
         int balance_factor_r(TreeNode<T> *) const;
+
+        void ll_rotate(TreeNode<T> *);
+        void lr_rotate(TreeNode<T> *);
+        void rr_rotate(TreeNode<T> *);
+        void rl_rotate(TreeNode<T> *);
     public:
+        AVLTree();
         AVLTree(const T&);
 
         int height() const;
@@ -35,8 +41,13 @@ namespace data {
 namespace data {
 
     template <typename T>
+    AVLTree<T>::AVLTree() {
+        this -> root = nullptr;
+    }
+
+    template <typename T>
     AVLTree<T>::AVLTree(const T& val) {
-        root = new TreeNode(val);
+        this -> root = new TreeNode(val);
     }
 
     template <typename T>
@@ -58,8 +69,43 @@ namespace data {
     }
 
     template <typename T>
+    int AVLTree<T>::balance_factor_r(TreeNode<T> *node) const {
+        if (!node) {
+            return 0;
+        }
+
+        int left = node -> left ? node -> left -> height : 0;
+        int right = node -> right ? node -> right -> height : 0;
+
+        return left - right;
+    }
+
+    template <typename T>
+    void AVLTree<T>::ll_rotate(TreeNode<T> *node) {
+        if (!node) {
+            return;
+        }
+
+        TreeNode<T> *new_root = node -> left;
+        TreeNode<T> *rchild_of_new_root = new_root -> right;
+
+        new_root -> right = node;
+        node -> left = rchild_of_new_root;
+
+        if (this -> root == node) {
+            this -> root = new_root;
+        }
+    }
+
+    template <typename T>
     void AVLTree<T>::insert(const T& val) {
         TreeNode<T> *prev = nullptr, *node = this -> root;
+
+        // If user calls default constructor and inserts an element,
+        if (!(this -> root)) {
+            this -> root = new TreeNode(val);
+            return;
+        }
 
         while (node) {
             prev = node;
@@ -79,20 +125,39 @@ namespace data {
             prev -> right = new_node;
         }
 
-        // So that the height of each node is recalculated.
+        /*
+            We calculate height so that we get the new heights of each node's subtree
+            to see if any rotations are required.
+        */
         auto __discard__ = this -> height();
-    }
 
-    template <typename T>
-    int AVLTree<T>::balance_factor_r(TreeNode<T> *node) const {
-        if (!node) {
-            return 0;
+        if (
+            balance_factor_r(prev) == 2 &&
+            balance_factor_r(prev -> left) == 1
+        ) {
+            ll_rotate(prev);
+        }
+        if (
+            balance_factor_r(prev) == 2 &&
+            balance_factor_r(prev -> left) == -1
+        ) {
+            lr_rotate(prev);
+        }
+        if (
+            balance_factor_r(prev) == -2 &&
+            balance_factor_r(prev -> right) == -1
+        ) {
+            rr_rotate(prev);
+        }
+        if (
+            balance_factor_r(prev) == -2 &&
+            balance_factor_r(prev -> right) == 1
+        ) {
+            rl_rotate(prev);
         }
 
-        int left = node -> left ? node -> left -> height : 0;
-        int right = node -> right ? node -> right -> height : 0;
-
-        return left - right;
+        // So that the height of each node is recalculated after all the rotations.
+        __discard__ = this -> height();
     }
 
 }

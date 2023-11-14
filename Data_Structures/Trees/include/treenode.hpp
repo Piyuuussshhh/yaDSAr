@@ -7,8 +7,7 @@
 namespace data {
 
     template <typename T = int>
-    class TreeNode {
-    public:
+    struct TreeNode {
         TreeNode<T>     *left;
         T               value;
         // for AVL trees.
