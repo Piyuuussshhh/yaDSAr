@@ -6,3 +6,5 @@ But I now see the potential this project has. Will start work towards this immed
 
 Chasing optimization at all possible avenues is quite possibly the greatest skill a developer can possess.
 My goal with this project is to train myself to achieve high levels of optimization across all projects I will take part in.
+
+### Get this project code reviewed by Cherno when complete!
