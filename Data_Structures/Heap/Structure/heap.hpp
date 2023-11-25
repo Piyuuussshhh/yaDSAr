@@ -43,17 +43,17 @@ namespace data {
 
 namespace data {
 
-    template <typename T, HeapType type>
-    Heap<T, type>::Heap() : {
-        this -> arr = vector();
+    template <typename T, HeapType type> requires std::totally_ordered<T>
+    Heap<T, type>::Heap() {
+        this -> arr = std::vector<T>();
     }
 
-    template <typename T, HeapType type>
-    Heap<T, type>::Heap(const T& val) : {
-        this -> arr = vector(1, val);
+    template <typename T, HeapType type> requires std::totally_ordered<T>
+    Heap<T, type>::Heap(const T& val) {
+        this -> arr = std::vector<T>(1, val);
     }
 
-    template <typename T, HeapType type>
+    template <typename T, HeapType type> requires std::totally_ordered<T>
     void Heap<T, type>::heapify(const int& idx) {
         int temp = this -> arr[idx], i = idx;
         switch (type) {
@@ -86,34 +86,34 @@ namespace data {
         }
     }
 
-    template <typename T, HeapType type>
+    template <typename T, HeapType type> requires std::totally_ordered<T>
     bool Heap<T, type>::empty() const {
         return (this -> arr).size() ? true : false;
     }
 
-    template <typename T, HeapType type>
+    template <typename T, HeapType type> requires std::totally_ordered<T>
     T Heap<T, type>::top() const {
         return this -> arr[0];
     }
 
-    template <typename T, HeapType type>
+    template <typename T, HeapType type> requires std::totally_ordered<T>
     constexpr size_t Heap<T, type>::size() const {
         return (this -> arr).size();
     }
 
-    template <typename T, HeapType type>
+    template <typename T, HeapType type> requires std::totally_ordered<T>
     void Heap<T, type>::push(const T& val) {
         (this -> arr).push_back(val);
         heapify(this -> size() - 1);
     }
 
-    template <typename T, HeapType type>
+    template <typename T, HeapType type> requires std::totally_ordered<T>
     void Heap<T, type>::pop() {
         (this -> arr).erase((this -> arr).begin());
         heapify();
     }
 
-    template <typename T, HeapType type>
+    template <typename T, HeapType type> requires std::totally_ordered<T>
     Heap<T, type>::~Heap() {}
 
 } // namespace data
